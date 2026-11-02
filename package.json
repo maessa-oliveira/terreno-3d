@@ -1,0 +1,20 @@
+{
+  "name": "terreno-3d",
+  "version": "1.0.0",
+  "description": "Visualizador 3D de levantamento topográfico no navegador",
+  "scripts": {
+    "test": "node --test tests/terreno.test.js",
+    "test:e2e": "node tests/e2e.mjs",
+    "gif": "node tests/gravar-gif.mjs"
+  },
+  "author": "Maessa Oliveira",
+  "license": "MIT",
+  "dependencies": {
+    "delaunator": "^5.0.1",
+    "three": "^0.170.0"
+  },
+  "type": "module",
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}

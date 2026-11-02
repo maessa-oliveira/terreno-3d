@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terreno 3D — visualizador de levantamento topográfico</title>
+<meta name="description" content="Carregue pontos XYZ de um levantamento e veja o terreno em 3D, com triangulação, curvas de nível e exportação DXF. Roda no navegador, sem instalar nada.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M2 26 L11 12 L16 19 L21 9 L30 26Z' fill='%2333a39a'/></svg>">
+<link rel="stylesheet" href="estilo.css">
+<script type="importmap">
+{ "imports": {
+  "three": "./vendor/three.module.min.js",
+  "three/addons/OrbitControls.js": "./vendor/OrbitControls.js",
+  "delaunator": "./vendor/delaunator.js",
+  "robust-predicates": "./vendor/robust-predicates/orient2d.js"
+} }
+</script>
+</head>
+<body>
+<main id="cena" aria-label="Visualização 3D do terreno"></main>
+
+<aside id="painel">
+  <header>
+    <h1>Terreno 3D</h1>
+    <p class="sub">Pontos XYZ → superfície, curvas de nível e DXF. Tudo no seu navegador — nenhum dado sai do computador.</p>
+  </header>
+
+  <section>
+    <label class="soltar" id="soltar">
+      <input type="file" id="arquivo" accept=".csv,.txt,.xyz,.pnezd" hidden>
+      <strong>Abrir pontos</strong>
+      <span>ou arraste um arquivo aqui<br><small>CSV/TXT: P,N,E,Z,D · P,E,N,Z · E,N,Z</small></span>
+    </label>
+    <div class="linha">
+      <button id="btnExemplo" type="button">Terreno de exemplo</button>
+      <select id="ordem" title="Ordem das colunas">
+        <option value="auto">colunas: auto</option>
+        <option value="PNEZ">P N E Z</option>
+        <option value="PENZ">P E N Z</option>
+        <option value="ENZ">E N Z</option>
+        <option value="NEZ">N E Z</option>
+      </select>
+    </div>
+    <p id="msg" class="msg" role="status"></p>
+  </section>
+
+  <section>
+    <h2>Exibição</h2>
+    <label class="campo">Exagero vertical <output id="oExagero">2,0×</output>
+      <input type="range" id="exagero" min="1" max="8" step="0.5" value="2"></label>
+    <label class="campo">Curvas a cada <output id="oIntervalo">1 m</output>
+      <input type="range" id="intervalo" min="0.25" max="10" step="0.25" value="1"></label>
+    <label class="campo">Lado máx. do triângulo <output id="oLado">auto</output>
+      <input type="range" id="lado" min="0" max="200" step="5" value="0"></label>
+    <div class="chips">
+      <label><input type="checkbox" id="vCurvas" checked> curvas</label>
+      <label><input type="checkbox" id="vMalha"> malha</label>
+      <label><input type="checkbox" id="vPontos"> pontos</label>
+      <label><input type="checkbox" id="vGirar" checked> girar</label>
+    </div>
+  </section>
+
+  <section>
+    <h2>Modelo</h2>
+    <dl id="stats"></dl>
+  </section>
+
+  <section class="linha">
+    <button id="btnDXF" type="button" class="primario">Baixar curvas (DXF)</button>
+    <button id="btnCSV" type="button">Baixar pontos (CSV)</button>
+  </section>
+
+  <footer>
+    Código aberto (MIT) · <a href="https://github.com/maessa-oliveira/terreno-3d">GitHub</a>
+  </footer>
+</aside>
+
+<div id="bussola" title="Norte"><svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><path d="M20 5 L27 26 L20 22 L13 26 Z" fill="#e0a64a"/><text x="20" y="37" text-anchor="middle" font-size="9" fill="#e5efed" font-weight="700">N</text></svg></div>
+<div id="legenda"></div>
+
+<script type="module" src="src/app.js"></script>
+</body>
+</html>
