@@ -53,6 +53,14 @@ O GitHub Actions roda as duas suítes a cada commit e publica a página no GitHu
 
 O terreno de exemplo (`exemplos/terreno-exemplo.csv`) é **fictício**, gerado por função matemática.
 
+## English
+
+**Browser-based 3D viewer for land-survey points.** Load a PNEZD/PENZ/ENZ file and get a Delaunay
+TIN with automatic max-edge, index and intermediate contour lines, statistics (relief, planimetric
+area, volume) and **DXF export** of the contours. Everything runs locally with three.js.
+
+👉 [Try it](https://maessa-oliveira.github.io/terreno-3d/) · `npm test` · `npm run test:e2e`
+
 ## Licença
 
 MIT — veja [LICENSE](LICENSE). Bibliotecas de terceiros em `vendor/` mantêm suas licenças
